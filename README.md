@@ -1,17 +1,11 @@
-# Enterprise Bot DevOps Assessment
-
-A streamlined Kubernetes deployment showcasing microservice containerization, Helm orchestration, cluster automation, and systematic debugging.
-
----
+# README
 
 ## 1. How to Run and Verify
 
 ### Prerequisites
 * Docker, Kind, kubectl, Helm.
 
-### Automated Setup
-Run the bootstrap script to create the local Kind cluster, install Ingress-Nginx, build the image, and deploy the Helm release:
-
+### Setup
 ```bash
 ./setup.sh
 ```
