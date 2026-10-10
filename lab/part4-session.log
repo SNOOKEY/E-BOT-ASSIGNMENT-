@@ -1395,3 +1395,71 @@ PS>kubectl -n debug-lab exec reporter-debug -- sh -c "head -c 250 /tmp/pods.json
 PS>kubectl -n debug-lab logs deployment/reporter --tail=50
 
 ]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs deployment/reporter --tail=50
+2026/10/10 12:43:32 GET /healthz -> 503 (from 10.244.0.1:47698)
+2026/10/10 12:43:37 GET /healthz -> 503 (from 10.244.0.1:34228)
+2026/10/10 12:43:42 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 12:43:42 GET /healthz -> 503 (from 10.244.0.1:34244)
+2026/10/10 12:43:47 GET /healthz -> 503 (from 10.244.0.1:38690)
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>lab/broken-chart/templates/reporter-deployment.yaml
+lab/broken-chart/templates/reporter-deployment.yaml : The term 'lab/broken-chart/templates/reporter-deployment.yaml' is 
+not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or 
+if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ lab/broken-chart/templates/reporter-deployment.yaml
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (lab/broken-char...deployment.yaml:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+lab/broken-chart/templates/reporter-deployment.yaml : The term
+'lab/broken-chart/templates/reporter-deployment.yaml' is not recognized as the name of a
+cmdlet, function, script file, or operable program. Check the spelling of the name, or if a
+path was included, verify that the path is correct and try again.
+At line:1 char:1
++ lab/broken-chart/templates/reporter-deployment.yaml
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (lab/broken-char...deployment.yaml:String) []
+   , CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>lab/broken-chart/templates/reporter-deployment.yaml
+lab/broken-chart/templates/reporter-deployment.yaml : The term 'lab/broken-chart/templates/reporter-deployment.yaml' is 
+not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or 
+if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ lab/broken-chart/templates/reporter-deployment.yaml
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (lab/broken-char...deployment.yaml:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+lab/broken-chart/templates/reporter-deployment.yaml : The term
+'lab/broken-chart/templates/reporter-deployment.yaml' is not recognized as the name of a
+cmdlet, function, script file, or operable program. Check the spelling of the name, or if a
+path was included, verify that the path is correct and try again.
+At line:1 char:1
++ lab/broken-chart/templates/reporter-deployment.yaml
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (lab/broken-char...deployment.yaml:String) []
+   , CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>agy
+> make the correctness in findings.md file... and make make it appealing and push
+
+⚠ There was a network issue connecting to the server, please try again.
+Error ID: 249ade16-1889-4f0b-ab61-ed14cb02dbaf-51
+
+─────────────────────────────────────────────────────────────────────────────────────────────
+>
+─────────────────────────────────────────────────────────────────────────────────────────────
+
+Resume with -c (or command below):
+agy --conversation=fb903325-1424-4b1f-b91c-fbf8c321ae13
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>agy
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>clear
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
