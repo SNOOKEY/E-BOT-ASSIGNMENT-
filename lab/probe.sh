@@ -1,0 +1,2 @@
+T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+curl -s -o /tmp/p.json -w "http=%{http_code} bytes=%{size_download} time=%{time_total}\n" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H "Authorization: Bearer $T" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods

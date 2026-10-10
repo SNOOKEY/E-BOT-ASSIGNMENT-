@@ -24,6 +24,8 @@ spec:
             - name: http
               containerPort: {{ .Values.common.port }}
           env:
+            - name: PORT
+              value: {{ .Values.common.port | quote }}
             {{- range $name, $value := .Values.worker.env }}
             - name: {{ $name }}
               value: {{ $value | quote }}
@@ -35,11 +37,18 @@ spec:
             initialDelaySeconds: 3
             periodSeconds: 5
             timeoutSeconds: 3
+          volumeMounts:
+            - name: cache
+              mountPath: /var/cache/app
           securityContext:
             runAsNonRoot: true
+            runAsUser: 10001
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
           resources:
             {{- toYaml .Values.worker.resources | nindent 12 }}
+      volumes:
+        - name: cache
+          emptyDir: {}

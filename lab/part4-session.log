@@ -1,0 +1,1397 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261010155034
+Username: ANAZ\anazs
+RunAs User: ANAZ\anazs
+Configuration Name: 
+Machine: ANAZ (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\anazs\AppData\Local\Programs\Microsoft VS Code\2a59476c9b\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Process ID: 8728
+PSVersion: 5.1.26100.9549
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9549
+BuildVersion: 10.0.26100.9549
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is lab\part4-session.log
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-PS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-> ]633;B
+PS>cd lab
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh up
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>clear
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh verify
+  FAIL  migrate Job has not completed (does it exist? did the chart even install cleanly?)
+  FAIL  deployment backend: 0/1 ready
+  FAIL  deployment gateway: 0/1 ready
+  FAIL  deployment worker: 0/1 ready
+  FAIL  deployment reporter: 0/1 ready
+  FAIL  deployment metrics: 0/1 ready
+  PASS  no pods in CrashLoopBackOff
+  FAIL  ServiceAccount debug-lab/reporter cannot list pods
+  FAIL  backend does not answer on http://backend:8080/healthz
+  FAIL  gateway /status does not report backend=ok
+  FAIL  reporter /report does not return a pod count
+
+10 check(s) failing, 1 passing. Keep digging — every failure is a symptom.
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get all
+deployment.apps/reporter   0/1     1            0           2m34s
+deployment.apps/worker     0/1     1            0           2m34s
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/backend-7948fd6b4b    1         1         0       2m34s
+replicaset.apps/gateway-5cbdcd4bf8    1         1         0       2m34s
+replicaset.apps/metrics-547dccf75     1         1         0       2m34s
+replicaset.apps/reporter-6f8bff6b8d   1         1         0       2m34s
+replicaset.apps/worker-5fcd6b9b6b     1         1         0       2m34s
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get events --sort-by=.lastTimestamp
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get events --sort-by=.lastTimestamp
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>clear
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>bash ./setup.sh
+/bin/bash: ./setup.sh: No such file or directory
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>cd C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>   Start-Transcript -Path part4-session.log -Append
+Transcript started, output file is part4-session.log
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs deploy/gateway
+Error from server (BadRequest): container "gateway" in pod "gateway-5cbdcd4bf8-txrqn" is wait
+ing to start: CreateContainerConfigError
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab port-forward svc/gateway 8081:80
+error: unable to forward port because pod is not running. Current status=Pending
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>cd C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>clear
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>cd C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh up
+==> applying cluster environment (cluster-state/)
+limitrange/debug-lab-guardrails created
+namespace/debug-lab unchanged
+==> installing the broken chart
+level=WARN msg="upgrade failed" name=debug-lab error="failed to create resource: Job.batch \"
+migrate\" is invalid: spec.template.spec.restartPolicy: Required value: valid values: \"OnFai
+lure\", \"Never\""
+Error: UPGRADE FAILED: failed to create resource: Job.batch "migrate" is invalid: spec.templa
+te.spec.restartPolicy: Required value: valid values: "OnFailure", "Never"
+
+helm reported an error. That is not your machine misbehaving —
+it is part of the exercise. Read the error; it is evidence.
+
+Lab is (partially) installed. Investigate with kubectl, fix the chart,
+re-run './scenario.sh up' to apply your fixes, and './scenario.sh verify'
+to check progress.
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods
+metrics-64bf8644dd-rkvxv    0/1     Running                      0            42s
+reporter-5b688c4c67-7p59q   0/1     Running                      0            42s
+reporter-6f8bff6b8d-2h57t   0/1     CreateContainerConfigError   0            24m
+worker-5fcd6b9b6b-jhx79     0/1     CreateContainerConfigError   0            24m
+worker-648bddc865-27ln4     0/1     CrashLoopBackOff             3 (3s ago)   42s
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get job migrate
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart | Select-String "runAsUser|BACKEND_URL"
+
+            runAsUser: 10001
+            - name: BACKEND_URL
+            runAsUser: 10001
+            runAsUser: 10001
+            runAsUser: 10001
+            runAsUser: 10001
+            runAsUser: 10001
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart | Select-String "restartPolicy|runAsUser|BACKEND_URL"
+
+
+            runAsUser: 10001
+            - name: BACKEND_URL
+            runAsUser: 10001
+            runAsUser: 10001
+            runAsUser: 10001
+            runAsUser: 10001
+      restartPolicy: OnFailure
+            runAsUser: 10001
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh up
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get job migrate
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe pod backend-6667f9f97c-6kshq
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs backend-6667f9f97c-6kshq
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs worker-648bddc865-27ln4 --previous
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe pod worker-648bddc865-27ln4 | Select-String -Pattern "Last State|Reason|Exit Code|Liveness|Readiness" -Context 0,2
+
+>       Reason:       CrashLoopBackOff
+>     Last State:     Terminated
+>       Reason:       Error
+>       Exit Code:    1
+        Started:      Sat, 10 Oct 2026 16:21:21 +0530
+        Finished:     Sat, 10 Oct 2026 16:21:21 +0530
+>     Readiness:  http-get http://:8080/healthz delay=3s timeout=3s period=5s #success=1
+#failure=3
+      Environment:
+        APP_MODE:  worker
+>   Type     Reason     Age                   From               Message
+    ----     ------     ----                  ----               -------
+    Normal   Scheduled  7m48s                 default-scheduler  Successfully assigned
+debug-lab/worker-648bddc865-27ln4 to demo-control-plane
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get events --sort-by=.lastTimestamp | Select-String "Warning|FailedCreate"
+
+26m         Warning   Failed              pod/reporter-6f8bff6b8d-2h57t    Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "reporter-6f8bff6b8d-2h57t_debug-lab(34713e4a-3365-468e-886c-aa393c05bc01)",
+container: reporter)
+26m         Warning   Failed              pod/gateway-5cbdcd4bf8-txrqn     Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "gateway-5cbdcd4bf8-txrqn_debug-lab(d6ef75a8-a30f-489f-908f-c7d423cef51b)",
+container: gateway)
+26m         Warning   Failed              pod/metrics-547dccf75-56bcp      Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "metrics-547dccf75-56bcp_debug-lab(ac5666e8-8d96-4b1c-91f8-1128d6a7ac00)", container:
+metrics)
+26m         Warning   Failed              pod/backend-7948fd6b4b-766gd     Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "backend-7948fd6b4b-766gd_debug-lab(6bec4e26-5c4e-4b8e-99f2-048b86436716)",
+container: backend)
+26m         Warning   Failed              pod/worker-5fcd6b9b6b-jhx79      Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "worker-5fcd6b9b6b-jhx79_debug-lab(e5e2fa14-2ac9-4038-9cc2-b278e6558e3d)", container:
+worker)
+3m34s       Warning   Failed              pod/worker-5fcd6b9b6b-jhx79      Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "worker-5fcd6b9b6b-jhx79_debug-lab(e5e2fa14-2ac9-4038-9cc2-b278e6558e3d)", container:
+worker)
+3m33s       Warning   Failed              pod/metrics-547dccf75-56bcp      Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "metrics-547dccf75-56bcp_debug-lab(ac5666e8-8d96-4b1c-91f8-1128d6a7ac00)", container:
+metrics)
+3m29s       Warning   Failed              pod/gateway-5cbdcd4bf8-txrqn     Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "gateway-5cbdcd4bf8-txrqn_debug-lab(d6ef75a8-a30f-489f-908f-c7d423cef51b)",
+container: gateway)
+3m29s       Warning   Failed              pod/backend-7948fd6b4b-766gd     Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "backend-7948fd6b4b-766gd_debug-lab(6bec4e26-5c4e-4b8e-99f2-048b86436716)",
+container: backend)
+3m27s       Warning   Failed              pod/reporter-6f8bff6b8d-2h57t    Error: container
+has runAsNonRoot and image has non-numeric user (nonroot), cannot verify user is non-root
+(pod: "reporter-6f8bff6b8d-2h57t_debug-lab(34713e4a-3365-468e-886c-aa393c05bc01)",
+container: reporter)
+2m56s       Warning   Unhealthy           pod/backend-6667f9f97c-6kshq     Readiness probe
+failed: Get "http://10.244.0.14:8080/healthz": dial tcp 10.244.0.14:8080: connect:
+connection refused
+2m55s       Warning   Unhealthy           pod/metrics-64bf8644dd-rkvxv     Readiness probe
+failed: Get "http://10.244.0.15:8080/healthz": dial tcp 10.244.0.15:8080: connect:
+connection refused
+2m54s       Warning   Unhealthy           pod/gateway-6c78fd6c6f-ljjmr     Readiness probe
+failed: Get "http://10.244.0.13:8080/healthz": dial tcp 10.244.0.13:8080: connect:
+connection refused
+2m53s       Warning   Unhealthy           pod/reporter-5b688c4c67-7p59q    Readiness probe
+failed: Get "http://10.244.0.16:8080/healthz": dial tcp 10.244.0.16:8080: connect:
+connection refused
+57s         Warning   BackOff             pod/worker-648bddc865-27ln4      Back-off
+restarting failed container worker in pod
+worker-648bddc865-27ln4_debug-lab(9f93757f-de2c-4260-b8a5-d4bdf816de86)
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart | Select-String -Pattern "name: PORT" -Context 0,1
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart | Select-String -Pattern "name: PORT" -Context 0,1
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>Get-Content broken-chart\templates\backend.yaml | Select-Object -Skip 18 -First 22
+      containers:
+        - name: backend
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.common.port }}
+          env:
+          - name: PORT
+              value: {{ .Values.common.port | quote }}
+            {{- range $name, $value := .Values.backend.env }}
+            - name: {{ $name }}
+              value: {{ $value | quote }}
+            {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.common.port }}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 3
+          securityContext:
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart | Select-String -Pattern "name: PORT" -Context 0,1
+
+>             - name: PORT
+                value: "8080"
+>             - name: PORT
+                value: "8080"
+>             - name: PORT
+                value: "8080"
+>             - name: PORT
+                value: "8080"
+>             - name: PORT
+                value: "8080"
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart | Select-String "emptyDir|/var/cache/app"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh up
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods -w
+
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh verify
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs deploy/gateway
+Found 2 pods, using pod/gateway-6c78fd6c6f-ljjmr
+2026/10/10 10:45:40 eb-debug-app 2.0.0 starting: mode=gateway pod=gateway-6c78fd6c6f-ljjmr li
+stening on :8081 (image default is 8081; set PORT to override)
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe pod -l app=gateway | Select-String -Pattern "Readiness|Unhealthy|BACKEND_URL" -Context 0,1
+
+>     Readiness:  http-get http://:8080/healthz delay=3s timeout=3s period=5s #success=1
+#failure=3
+      Environment:
+>       BACKEND_URL:  http://backend.default.svc:8080
+        VERSION:      2.0.0
+>   Warning  Unhealthy  20s (x64 over 5m23s)  kubelet            spec.containers{gateway}:
+Readiness probe failed: HTTP probe failed with statuscode: 503
+
+>     Readiness:  http-get http://:8080/healthz delay=3s timeout=3s period=5s #success=1
+#failure=3
+      Environment:
+>       BACKEND_URL:  http://backend.default.svc:8080
+        VERSION:      2.0.0
+>   Warning  Unhealthy  4m7s (x248 over 24m)  kubelet            spec.containers{gateway}:
+Readiness probe failed: Get "http://10.244.0.13:8080/healthz": dial tcp 10.244.0.13:8080:
+connect: connection refused
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs deploy/reporter
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get rolebinding reporter-read -o yaml
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl auth can-i list pods -n debug-lab --as=system:serviceaccount:debug-lab:reporter
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart | Select-String "volumeMounts|emptyDir|/var/cache/app"
+
+          volumeMounts:
+              mountPath: /var/cache/app
+          emptyDir: {}
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh up
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs gateway-65b9f6fc67-nwhcd
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe pod gateway-65b9f6fc67-nwhcd | Select-String -Pattern "Readiness|Unhealthy|BACKEND_URL" -Context 0,1
+
+>     Readiness:  http-get http://:8080/healthz delay=3s timeout=3s period=5s #success=1
+#failure=3
+      Environment:
+>       BACKEND_URL:  http://backend.default.svc:8080
+        VERSION:      2.0.0
+>   Warning  Unhealthy  16s (x126 over 10m)  kubelet            spec.containers{gateway}:
+Readiness probe failed: HTTP probe failed with statuscode: 503
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs reporter-757f5f86f-p5m6l
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl auth can-i list pods -n debug-lab --as=system:serviceaccount:debug-lab:reporter
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get rolebinding reporter-read -o yaml
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart | Select-String "BACKEND_URL" -Context 0,1
+
+>             - name: BACKEND_URL
+                value: "http://backend.debug-lab.svc:8080"
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart | Select-String "kind: ServiceAccount" -Context 0,2
+
+> kind: ServiceAccount
+  metadata:
+    name: reporter
+>   - kind: ServiceAccount
+      name: reporter
+      namespace: default
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh up
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl auth can-i list pods -n debug-lab --as=system:serviceaccount:debug-lab:reporter
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm template debug-lab ./broken-chart -n debug-lab | Select-String "BACKEND_URL" -Context 0,1
+
+>             - name: BACKEND_URL
+                value: "http://backend.debug-lab.svc:8080"
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh verify
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh verify
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh verify
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe deployment reporter
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe pod reporter-5b688c4c67-7p59q
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe pod reporter-757f5f86f-p5m6l
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs reporter-5b688c4c67-7p59q --tail=100
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs reporter-757f5f86f-p5m6l --tail=100
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>Select-String -Path .\broken-chart\templates\reporter.yaml -Pattern "APP_MODE|APP_NAME|VERSION|PORT|readinessProbe|livenessProbe|command|args" -Context 2,4
+
+> broken-chart\templates\reporter.yaml:1:apiVersion: apps/v1
+  broken-chart\templates\reporter.yaml:2:kind: Deployment
+  broken-chart\templates\reporter.yaml:3:metadata:
+> broken-chart\templates\reporter.yaml:4:  name: reporter
+  broken-chart\templates\reporter.yaml:5:  labels:
+> broken-chart\templates\reporter.yaml:6:    app: reporter
+  broken-chart\templates\reporter.yaml:7:    {{- include "lab.labels" . | nindent 4 }}
+  broken-chart\templates\reporter.yaml:8:spec:
+> broken-chart\templates\reporter.yaml:9:  replicas: {{ .Values.reporter.replicas }}
+  broken-chart\templates\reporter.yaml:10:  selector:
+  broken-chart\templates\reporter.yaml:11:    matchLabels:
+> broken-chart\templates\reporter.yaml:12:      app: reporter
+  broken-chart\templates\reporter.yaml:13:  template:
+  broken-chart\templates\reporter.yaml:14:    metadata:
+  broken-chart\templates\reporter.yaml:15:      labels:
+> broken-chart\templates\reporter.yaml:16:        app: reporter
+  broken-chart\templates\reporter.yaml:17:        {{- include "lab.labels" . | nindent 8 }}
+  broken-chart\templates\reporter.yaml:18:    spec:
+> broken-chart\templates\reporter.yaml:19:      serviceAccountName: {{
+.Values.reporter.serviceAccountName }}
+  broken-chart\templates\reporter.yaml:20:      containers:
+> broken-chart\templates\reporter.yaml:21:        - name: reporter
+  broken-chart\templates\reporter.yaml:22:          image: "{{ .Values.image.repository
+}}:{{ .Values.image.tag }}"
+  broken-chart\templates\reporter.yaml:23:          imagePullPolicy: {{
+.Values.image.pullPolicy }}
+> broken-chart\templates\reporter.yaml:24:          ports:
+  broken-chart\templates\reporter.yaml:25:            - name: http
+> broken-chart\templates\reporter.yaml:26:              containerPort: {{
+.Values.common.port }}
+  broken-chart\templates\reporter.yaml:27:          env:
+  broken-chart\templates\reporter.yaml:28:            - name: NAMESPACE
+  broken-chart\templates\reporter.yaml:29:              valueFrom:
+  broken-chart\templates\reporter.yaml:30:                fieldRef:
+  broken-chart\templates\reporter.yaml:31:                  fieldPath: metadata.namespace
+> broken-chart\templates\reporter.yaml:32:            - name: PORT
+> broken-chart\templates\reporter.yaml:33:              value: {{ .Values.common.port |
+quote }}
+> broken-chart\templates\reporter.yaml:34:            {{- range $name, $value :=
+.Values.reporter.env }}
+  broken-chart\templates\reporter.yaml:35:            - name: {{ $name }}
+  broken-chart\templates\reporter.yaml:36:              value: {{ $value | quote }}
+  broken-chart\templates\reporter.yaml:37:            {{- end }}
+> broken-chart\templates\reporter.yaml:38:          readinessProbe:
+  broken-chart\templates\reporter.yaml:39:            httpGet:
+  broken-chart\templates\reporter.yaml:40:              path: /healthz
+> broken-chart\templates\reporter.yaml:41:              port: {{ .Values.common.port }}
+  broken-chart\templates\reporter.yaml:42:            initialDelaySeconds: 3
+  broken-chart\templates\reporter.yaml:43:            periodSeconds: 5
+  broken-chart\templates\reporter.yaml:44:            timeoutSeconds: 3
+  broken-chart\templates\reporter.yaml:45:          securityContext:
+  broken-chart\templates\reporter.yaml:51:              drop: ["ALL"]
+  broken-chart\templates\reporter.yaml:52:          resources:
+> broken-chart\templates\reporter.yaml:53:            {{- toYaml .Values.reporter.resources
+| nindent 12 }}
+  broken-chart\templates\reporter.yaml:54:---
+> broken-chart\templates\reporter.yaml:55:apiVersion: v1
+  broken-chart\templates\reporter.yaml:56:kind: Service
+  broken-chart\templates\reporter.yaml:57:metadata:
+> broken-chart\templates\reporter.yaml:58:  name: reporter
+  broken-chart\templates\reporter.yaml:59:  labels:
+> broken-chart\templates\reporter.yaml:60:    app: reporter
+  broken-chart\templates\reporter.yaml:61:    {{- include "lab.labels" . | nindent 4 }}
+  broken-chart\templates\reporter.yaml:62:spec:
+  broken-chart\templates\reporter.yaml:63:  selector:
+> broken-chart\templates\reporter.yaml:64:    app: reporter
+> broken-chart\templates\reporter.yaml:65:  ports:
+  broken-chart\templates\reporter.yaml:66:    - name: http
+> broken-chart\templates\reporter.yaml:67:      port: 8080
+> broken-chart\templates\reporter.yaml:68:      targetPort: {{ .Values.common.port }}
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get deployment reporter -o yaml
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs deployment/reporter --all-pods=true --tail=100
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>clear
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs reporter-757f5f86f-p5m6l --tail=10
+2026/10/10 11:39:32 GET /healthz -> 503 (from 10.244.0.1:53550)
+2026/10/10 11:39:37 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 11:39:37 GET /healthz -> 503 (from 10.244.0.1:48200)
+2026/10/10 11:39:39 GET /healthz -> 503 (from 10.244.0.1:48206)
+2026/10/10 11:39:44 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 11:39:44 GET /healthz -> 503 (from 10.244.0.1:57532)
+2026/10/10 11:39:49 GET /healthz -> 503 (from 10.244.0.1:57534)
+2026/10/10 11:39:54 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 11:39:54 GET /healthz -> 503 (from 10.244.0.1:52212)
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods --as=system:serviceaccount:debug-lab:reporter -o name
+
+pod/backend-7b85c8fd47-hpxmq
+pod/gateway-7858496cb7-48nw9
+pod/metrics-8d7f44f54-g4vxp
+pod/migrate-jpzfl
+pod/reporter-5b688c4c67-7p59q
+pod/reporter-757f5f86f-p5m6l
+pod/worker-bcd957b78-zzqvk
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe pod reporter-757f5f86f-p5m6l | Select-String -Pattern "Service Account|NAMESPACE|Mounts" -Context 0,2
+
+> Namespace:        debug-lab
+  Priority:         0
+> Service Account:  reporter
+  Node:             demo-control-plane/172.18.0.2
+  Start Time:       Sat, 10 Oct 2026 16:34:25 +0530
+>       NAMESPACE:  debug-lab (v1:metadata.namespace)
+        PORT:       8080
+        APP_MODE:   reporter
+>     Mounts:
+        /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-j6gsb (ro)
+  Conditions:
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab rollout restart deploy/reporter
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods -w
+
+PS>TerminatingError(): "The pipeline has been stopped."
+>> TerminatingError(): "The pipeline has been stopped."
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs deploy/reporter --tail=10
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl get --raw "/api/v1/namespaces/debug-lab/pods" --as="system:serviceaccount:debug-lab:reporter"
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get role reporter -o yaml
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get rolebinding reporter -o yaml
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>clear
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get roles,rolebindings
+
+NAME                                           CREATED AT
+role.rbac.authorization.k8s.io/reporter-read   2026-10-10T10:21:40Z
+
+NAME                                                  ROLE                 AGE
+rolebinding.rbac.authorization.k8s.io/reporter-read   Role/reporter-read   83m
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl get clusterroles,clusterrolebindings | Select-String -Pattern "reporter"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get role reporter-read -o yaml
+  labels:
+    app: reporter
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/part-of: eb-debug-lab
+    helm.sh/chart: debug-lab-2.0.0
+  name: reporter-read
+  namespace: debug-lab
+  resourceVersion: "5836"
+  uid: 943a4c77-10a3-49b2-8cf6-195cdc1c3422
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get rolebinding reporter-read -o yaml
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods -l app.kubernetes.io/name=reporter -o wide
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods | Select-String reporter
+
+reporter-68b5f8c974-kzksl   0/1     Running     0          6m28s
+reporter-757f5f86f-p5m6l    0/1     Running     0          42m
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs <CURRENT_REPORTER_POD> --tail=40
+At line:1 char:27
++ kubectl -n debug-lab logs <CURRENT_REPORTER_POD> --tail=40
++                           ~
+The '<' operator is reserved for future use.
+At line:1 char:27
++ kubectl -n debug-lab logs <CURRENT_REPORTER_POD> --tail=40
++                           ~
+The '<' operator is reserved for future use.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : RedirectionNotSupported
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs reporter-68b5f8c974-kzksl --tail=40
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs reporter-757f5f86f-p5m6l --tail=20
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe pod reporter-68b5f8c974-kzksl
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl auth can-i list pods -n debug-lab --as=system:serviceaccount:debug-lab:reporter
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl auth can-i get pods -n debug-lab --as=system:serviceaccount:debug-lab:reporter
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-68b5f8c974-kzksl -- sh -c 'ls -la /var/run/secrets/kubernetes.io/serviceaccount'
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-68b5f8c974-kzksl -- sh -c 'test -s /var/run/secrets/kubernetes.io/serviceaccount/token && echo TOKEN_PRESENT; test -s /var/run/secrets/kubernetes.io/serviceaccount/ca.crt && echo CA_PRESENT'
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-68b5f8c974-kzksl -- sh -c 'TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token); NS=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace); wget -S -O - --header="Authorization: Bearer $TOKEN" --ca-certificate=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt "https://kubernetes.default.svc/api/v1/namespaces/$NS/pods"'
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get deployment reporter -o jsonpath="{.spec.template.spec.containers[0].command}{' '}{.spec.template.spec.containers[0].args}"
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get deployment reporter -o yaml
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get deployment reporter -o jsonpath="{.spec.template.spec.automountServiceAccountToken}"
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get serviceaccount reporter -o yaml
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab run reporter-debug --rm -i --restart=Never --image=curlimages/curl:8.10.1 --overrides='{"spec":{"serviceAccountName":"reporter"}}' --command -- curl -sS --max-time 10 https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab run reporter-debug --image=curlimages/curl:8.10.1 --restart=Never --overrides='{"spec":{"serviceAccountName":"reporter"}}' --command -- sleep 300
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>@'
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reporter-debug
+  namespace: debug-lab
+spec:
+  serviceAccountName: reporter
+  restartPolicy: Never
+  containers:
+    - name: curl
+      image: curlimages/curl:8.10.1
+      command: ["sleep", "300"]
+'@ | Set-Content -Encoding ascii reporter-debug.yaml
+
+kubectl apply -f reporter-debug.yaml
+kubectl -n debug-lab wait --for=condition=Ready pod/reporter-debug --timeout=120s
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- curl -sS --max-time 10 https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- sh -c 'TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token); curl -sS --max-time 10 --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H "Authorization: Bearer $TOKEN" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods'
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- curl -sk -H "Authorization: Bearer $(kubectl -n debug-lab exec reporter-debug -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods
+}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>clear
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- curl -sk -H "Authorization: Bearer $(kubectl -n debug-lab exec reporter-debug -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods
+                  0
+                ]
+              }
+            }
+          }
+        ],
+        "qosClass": "Burstable",
+        "allocatedResources": {
+          "cpu": "50m",
+          "memory": "64Mi"
+        },
+        "resources": {
+          "limits": {
+            "cpu": "200m",
+            "memory": "128Mi"
+          },
+          "requests": {
+            "cpu": "28m",
+            "memory": "64Mi"
+          }
+        }
+      }
+    }
+  ]
+}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab rollout status deployment/reporter --timeout=30s
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- curl -sk -H "Authorization: Bearer $(kubectl -n debug-lab exec reporter-debug -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods
+}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe deployment reporter
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>$token = kubectl -n debug-lab exec reporter-debug -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- curl -sk -H "Authorization: Bearer $token" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods
+}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get endpoints reporter -o yaml
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods -l app=reporter --show-labels
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>.\scenario.sh verify
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>$token = kubectl -n debug-lab exec reporter-debug -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab delete pod reporter-debug
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>clear
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs reporter-68b5f8c974-kzksl
+2026/10/10 12:00:17 GET /healthz -> 503 (from 10.244.0.1:41224)
+2026/10/10 12:00:22 GET /healthz -> 503 (from 10.244.0.1:41232)
+2026/10/10 12:00:27 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 12:00:27 GET /healthz -> 503 (from 10.244.0.1:52836)
+2026/10/10 12:00:32 GET /healthz -> 503 (from 10.244.0.1:52844)
+2026/10/10 12:00:37 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 12:00:37 GET /healthz -> 503 (from 10.244.0.1:46882)
+2026/10/10 12:00:42 GET /healthz -> 503 (from 10.244.0.1:46890)
+2026/10/10 12:00:46 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 12:00:46 GET /healthz -> 503 (from 10.244.0.1:43226)
+2026/10/10 12:00:51 GET /healthz -> 503 (from 10.244.0.1:43228)
+2026/10/10 12:00:56 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 12:00:56 GET /healthz -> 503 (from 10.244.0.1:54142)
+2026/10/10 12:01:01 GET /healthz -> 503 (from 10.244.0.1:54154)
+2026/10/10 12:01:06 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 12:01:06 GET /healthz -> 503 (from 10.244.0.1:51008)
+2026/10/10 12:01:11 GET /healthz -> 503 (from 10.244.0.1:51020)
+2026/10/10 12:01:16 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 12:01:16 GET /healthz -> 503 (from 10.244.0.1:60394)
+2026/10/10 12:01:21 GET /healthz -> 503 (from 10.244.0.1:60404)
+2026/10/10 12:01:26 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 12:01:26 GET /healthz -> 503 (from 10.244.0.1:37178)
+2026/10/10 12:01:31 GET /healthz -> 503 (from 10.244.0.1:37180)
+2026/10/10 12:01:36 pod list failed: parse pod list: unexpected end of JSON input
+2026/10/10 12:01:36 GET /healthz -> 503 (from 10.244.0.1:37488)
+2026/10/10 12:01:41 GET /healthz -> 503 (from 10.244.0.1:37496)
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>(kubectl get --raw /api/v1/namespaces/debug-lab/pods --as=system:serviceaccount:debug-lab:reporter | Out-String).Length
+50785
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pod reporter-68b5f8c974-kzksl -o jsonpath='{.spec.containers[0].resources}'
+{"limits":{"cpu":"200m","memory":"128Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab describe pod reporter-68b5f8c974-kzksl | Select-String -Pattern "Limits|Requests|cpu|memory" -Context 0,0
+
+    Limits:
+      cpu:     200m
+      memory:  128Mi
+    Requests:
+      cpu:      50m
+      memory:   64Mi
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pods
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab delete pod reporter-debug --ignore-not-found
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>(Get-Content .\reporter-debug.yaml -Raw).Replace('"300"', '"3600"') |  Set-Content -Encoding ascii .\reporter-debug.yaml
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl apply -f .\reporter-debug.yaml
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab wait --for=condition=Ready pod/reporter-debug --timeout=120s
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>$token = (kubectl -n debug-lab exec reporter-debug -- cat /var/run/secrets/kubernetes.io/serviceaccount/token).Trim()
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- curl -sk -H "Authorization: Bearer $token" "https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods"
+}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>bash ./scenario.sh verify
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl config current-context
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl get nodes
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl get namespaces
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>helm list -A
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get deployments,jobs,pods,services
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>Test-Path .\cluster-state\namespace.yaml
+True
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>Test-Path .\broken-chart\Chart.yaml
+True
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>bash ./scenario.sh up
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get deployments,jobs,pods,services
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>bash ./scenario.sh verify
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>$kubectlDir = Split-Path (Get-Command kubectl).Source
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>$helmDir = Split-Path (Get-Command helm).Source
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>$env:PATH = "$kubectlDir;$helmDir;$env:PATH"
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>bash -c 'command -v kubectl; command -v helm; kubectl get nodes'
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>bash ./scenario.sh verify
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" ./scenario.sh verify
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- sh -c 'curl -s -o /tmp/p.json -w "http=%{http_code} bytes=%{size_download} time=%{time_total}\n" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods'
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>@'
+T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+curl -s -o /tmp/p.json -w "http=%{http_code} bytes=%{size_download} time=%{time_total}\n" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H "Authorization: Bearer $T" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods
+'@ | Set-Content -NoNewline -Encoding ascii probe.sh
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>@'
+T=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+curl -s -o /tmp/p.json -w "http=%{http_code} bytes=%{size_download} time=%{time_total}\n" --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H "Authorization: Bearer $T" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods
+'@ | Set-Content -NoNewline -Encoding ascii probe.sh
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl cp probe.sh debug-lab/reporter-debug:/tmp/probe.sh
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- sh /tmp/probe.sh
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- sh -c "curl -s -o /dev/null -w 'http=%{http_code} bytes=%{size_download} time=%{time_total}\n' --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H \`"Authorization: Bearer `$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)\`" https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods"
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>docker create --name ebapp docker.io/ebinterview/eb-debug-app:1.0.1
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>docker export ebapp -o ebapp.tar
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>docker rm ebapp
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>tar -tvf ebapp.tar
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>mkdir ebfs
+
+
+    Directory: C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        10-10-2026     17:49                ebfs
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>tar -xf ebapp.tar -C ebfs
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>Get-ChildItem ebfs -Recurse -File | Sort-Object Length -Descending | Select-Object -First 5 FullName, Length
+
+FullName                                                                              Length
+--------                                                                              ------
+C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab\ebfs\eb-debug-app                      5849240
+C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab\ebfs\etc\ssl\certs\ca-certificates.crt  216591
+C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab\ebfs\usr\share\zoneinfo\tzdata.zi       114399
+C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab\ebfs\usr\share\doc\tzdata\changelog.gz   83345
+C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab\ebfs\etc\mime.types                      73816
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" -c "grep -a -o -E '[A-Z][A-Z0-9_]{3,}' ebfs/eb-debug-app | sort -u | grep -i -E 'LIMIT|MAX|SIZE|BYTES|TIMEOUT|PAGE|READ|BUFFER|API|KUBE|NAMESPACE|MODE'"
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>& "C:\Program Files\Git\bin\bash.exe" -c "grep -a -o -E '[A-Za-z_ ]{0,40}(pod list|MAX_|_LIMIT|_BYTES|_TIMEOUT)[A-Za-z_ ]{0,40}' ebfs/eb-debug-app | sort -u | head -40"
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pod reporter-68b5f8c974-kzksl -o jsonpath='{range .spec.containers[0].env[*]}{.name}={.value}{"\n"}{end}'
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>Select-String -Path .\broken-chart\values.yaml -Pattern 'reporter' -Context 0,12
+
+> broken-chart\values.yaml:61:reporter:
+  broken-chart\values.yaml:62:  replicas: 1
+> broken-chart\values.yaml:63:  serviceAccountName: reporter
+  broken-chart\values.yaml:64:  env:
+> broken-chart\values.yaml:65:    APP_MODE: "reporter"
+> broken-chart\values.yaml:66:    APP_NAME: "reporter"
+  broken-chart\values.yaml:67:    VERSION: "2.0.0"
+  broken-chart\values.yaml:68:  resources:
+  broken-chart\values.yaml:69:    requests:
+  broken-chart\values.yaml:70:      cpu: "50m"
+  broken-chart\values.yaml:71:      memory: "64Mi"
+  broken-chart\values.yaml:72:    limits:
+  broken-chart\values.yaml:73:      cpu: "200m"
+  broken-chart\values.yaml:74:      memory: "128Mi"
+  broken-chart\values.yaml:75:
+  broken-chart\values.yaml:76:metrics:
+  broken-chart\values.yaml:77:  replicas: 1
+  broken-chart\values.yaml:78:  env:
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>Get-Content .\broken-chart\templates\reporter.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reporter
+  labels:
+    app: reporter
+    {{- include "lab.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.reporter.replicas }}
+  selector:
+    matchLabels:
+      app: reporter
+  template:
+    metadata:
+      labels:
+        app: reporter
+        {{- include "lab.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.reporter.serviceAccountName }}
+      containers:
+        - name: reporter
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.common.port }}
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: PORT
+              value: {{ .Values.common.port | quote }}
+            {{- range $name, $value := .Values.reporter.env }}
+            - name: {{ $name }}
+              value: {{ $value | quote }}
+            {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.common.port }}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 3
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            {{- toYaml .Values.reporter.resources | nindent 12 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reporter
+  labels:
+    app: reporter
+    {{- include "lab.labels" . | nindent 4 }}
+spec:
+  selector:
+    app: reporter
+  ports:
+    - name: http
+      port: 8080
+      targetPort: {{ .Values.common.port }}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>Get-Content .\broken-chart\templates\backend.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+    {{- include "lab.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.backend.replicas }}
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+        {{- include "lab.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.common.port }}
+          env:
+            - name: PORT
+              value: {{ .Values.common.port | quote }}
+            {{- range $name, $value := .Values.backend.env }}
+            - name: {{ $name }}
+              value: {{ $value | quote }}
+            {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.common.port }}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 3
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  labels:
+    app: backend
+    {{- include "lab.labels" . | nindent 4 }}
+spec:
+  selector:
+    app: backend
+  ports:
+    - name: http
+      port: 8080
+      targetPort: {{ .Values.common.port }}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>Select-String -Path .\broken-chart\values.yaml -Pattern 'reporter' -Context 0,12
+
+> broken-chart\values.yaml:61:reporter:
+  broken-chart\values.yaml:62:  replicas: 1
+> broken-chart\values.yaml:63:  serviceAccountName: reporter
+  broken-chart\values.yaml:64:  env:
+> broken-chart\values.yaml:65:    APP_MODE: "reporter"
+> broken-chart\values.yaml:66:    APP_NAME: "reporter"
+  broken-chart\values.yaml:67:    VERSION: "2.0.0"
+  broken-chart\values.yaml:68:  resources:
+  broken-chart\values.yaml:69:    requests:
+  broken-chart\values.yaml:70:      cpu: "50m"
+  broken-chart\values.yaml:71:      memory: "64Mi"
+  broken-chart\values.yaml:72:    limits:
+  broken-chart\values.yaml:73:      cpu: "200m"
+  broken-chart\values.yaml:74:      memory: "128Mi"
+  broken-chart\values.yaml:75:
+  broken-chart\values.yaml:76:metrics:
+  broken-chart\values.yaml:77:  replicas: 1
+  broken-chart\values.yaml:78:  env:
+
+
+PS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> Get-Content .\broken-chart\templates\reporter.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reporter
+  labels:
+    app: reporter
+    {{- include "lab.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.reporter.replicas }}
+  selector:
+    matchLabels:
+      app: reporter
+  template:
+    metadata:
+      labels:
+        app: reporter
+        {{- include "lab.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Values.reporter.serviceAccountName }}
+      containers:
+        - name: reporter
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.common.port }}
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: PORT
+              value: {{ .Values.common.port | quote }}
+            {{- range $name, $value := .Values.reporter.env }}
+            - name: {{ $name }}
+              value: {{ $value | quote }}
+            {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.common.port }}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 3
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            {{- toYaml .Values.reporter.resources | nindent 12 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reporter
+  labels:
+    app: reporter
+    {{- include "lab.labels" . | nindent 4 }}
+spec:
+  selector:
+    app: reporter
+  ports:
+    - name: http
+      port: 8080
+      targetPort: {{ .Values.common.port }}
+PS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> Get-Content .\broken-chart\templates\backend.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+    {{- include "lab.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.backend.replicas }}
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+        {{- include "lab.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: backend
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.common.port }}
+          env:
+            - name: PORT
+              value: {{ .Values.common.port | quote }}
+            {{- range $name, $value := .Values.backend.env }}
+            - name: {{ $name }}
+              value: {{ $value | quote }}
+            {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.common.port }}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 3
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  labels:
+    app: backend
+    {{- include "lab.labels" . | nindent 4 }}
+spec:
+  selector:
+    app: backend
+  ports:
+    - name: http
+      port: 8080
+      targetPort: {{ .Values.common.port }}
+PS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> kubectl -n debug-lab get pod reporter-debug
+At line:30 char:8
++     {{- include "lab.labels" . | nindent 4 }}
++        ~
+Missing expression after unary operator '-'.
+
+At line:30 char:9
++     {{- include "lab.labels" . | nindent 4 }}
++         ~~~~~~~
+Unexpected token 'include' in expression or statement.
+
+At line:40 char:12
++         {{- include "lab.labels" . | nindent 8 }}
++            ~
+Missing expression after unary operator '-'.
+
+At line:40 char:13
++         {{- include "lab.labels" . | nindent 8 }}
++             ~~~~~~~
+Unexpected token 'include' in expression or statement.
+
+At line:44 char:10
++         - name: reporter
++          ~
+Missing expression after unary operator '-'.
+
+At line:44 char:11
++         - name: reporter
++           ~~~~~
+Unexpected token 'name:' in expression or statement.
+
+At line:48 char:14
++             - name: http
++              ~
+Missing expression after unary operator '-'.
+
+At line:48 char:15
++             - name: http
++               ~~~~~
+Unexpected token 'name:' in expression or statement.
+
+At line:51 char:14
++             - name: NAMESPACE
++              ~
+Missing expression after unary operator '-'.
+
+At line:51 char:15
++             - name: NAMESPACE
++               ~~~~~
+Unexpected token 'name:' in expression or statement.
+
+Not all parse errors were reported.  Correct the reported errors and try again.
+At line:30 char:8
++     {{- include "lab.labels" . | nindent 4 }}
++        ~
+Missing expression after unary operator '-'.
+
+At line:30 char:9
++     {{- include "lab.labels" . | nindent 4 }}
++         ~~~~~~~
+Unexpected token 'include' in expression or statement.
+
+At line:40 char:12
++         {{- include "lab.labels" . | nindent 8 }}
++            ~
+Missing expression after unary operator '-'.
+
+At line:40 char:13
++         {{- include "lab.labels" . | nindent 8 }}
++             ~~~~~~~
+Unexpected token 'include' in expression or statement.
+
+At line:44 char:10
++         - name: reporter
++          ~
+Missing expression after unary operator '-'.
+
+At line:44 char:11
++         - name: reporter
++           ~~~~~
+Unexpected token 'name:' in expression or statement.
+
+At line:48 char:14
++             - name: http
++              ~
+Missing expression after unary operator '-'.
+
+At line:48 char:15
++             - name: http
++               ~~~~~
+Unexpected token 'name:' in expression or statement.
+
+At line:51 char:14
++             - name: NAMESPACE
++              ~
+Missing expression after unary operator '-'.
+
+At line:51 char:15
++             - name: NAMESPACE
++               ~~~~~
+Unexpected token 'name:' in expression or statement.
+
+Not all parse errors were reported.  Correct the reported errors and try again.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingExpressionAfterOperator
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab get pod reporter-debug
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>$token = (kubectl -n debug-lab exec reporter-debug -- cat /var/run/secrets/kubernetes.io/serviceaccount/token).Trim()
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- curl -sk -H "Authorization: Bearer $token" "https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods"
+}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>$token = (kubectl -n debug-lab exec reporter-debug -- cat /var/run/secrets/kubernetes.io/serviceaccount/token).Trim()
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- curl -sk -H "Authorization: Bearer $token" "https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods"
+          }
+        ],
+        "qosClass": "Burstable",
+        "allocatedResources": {
+          "cpu": "50m",
+          "memory": "64Mi"
+        },
+        "resources": {
+          "limits": {
+            "cpu": "200m",
+            "memory": "128Mi"
+          },
+          "requests": {
+            "cpu": "28m",
+            "memory": "64Mi"
+          }
+        }
+      }
+    }
+  ]
+}
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>$token = (kubectl -n debug-lab exec reporter-debug -- cat /var/run/secrets/kubernetes.io/serviceaccount/token).Trim()
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- curl -sk -o /tmp/pods.json -w "HTTP %{http_code} bytes=%{size_download}`n" -H "Authorization: Bearer $token" "https://kubernetes.default.svc/api/v1/namespaces/debug-lab/pods"
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab exec reporter-debug -- sh -c "head -c 250 /tmp/pods.json"
+        "namespace": "d
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
+PS>kubectl -n debug-lab logs deployment/reporter --tail=50
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5canazs\x5cprojects\x5cE-BOT-ASSIGNMENT-\x5clabPS C:\Users\anazs\projects\E-BOT-ASSIGNMENT-\lab> ]633;B
