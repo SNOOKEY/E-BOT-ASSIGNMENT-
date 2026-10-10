@@ -46,7 +46,7 @@ class Handler(BaseHTTPRequestHandler):
             self._send(404, {"error": "not found"})
 
     def log_message(self, fmt, *args):
-        sys.stdout.write("%s - %s\n" % (self.address_string(), fmt % args))
+        sys.stdout.write(f"{self.address_string()} - {fmt % args}\n")
         sys.stdout.flush()
 
 

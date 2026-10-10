@@ -1,11 +1,11 @@
 # ---- build stage: compile bytecode (no third-party deps needed) ----
-FROM python:3.12.7-slim-bookworm AS builder
+FROM python:3.12-slim AS builder
 WORKDIR /build
 COPY app.py .
 RUN python -m compileall -q app.py
 
 # ---- runtime stage ----
-FROM python:3.12.7-slim-bookworm
+FROM python:3.12-slim
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PORT=8080
